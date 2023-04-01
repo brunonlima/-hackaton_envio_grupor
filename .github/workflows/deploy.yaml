@@ -7,7 +7,8 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  IMAGE_NAME: 178675768868.dkr.ecr.us-east-1.amazonaws.com
+  IMAGE_NAME: hackaton-image
+  LOGIN_SERVER: 178675768868.dkr.ecr.us-east-1.amazonaws.com
   ECS_CLUSTER: hackaton_cluster
   ECS_SERVICE: hackaton-service
   TASK_DEFINITION: infra/task-definition.json
