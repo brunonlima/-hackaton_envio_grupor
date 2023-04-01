@@ -2,13 +2,13 @@
 FROM openjdk:11-jdk-alpine
 
 # Diretório de trabalho
-WORKDIR /build
+WORKDIR /app
 
 # Copia os arquivos necessários para dentro do container
-COPY target/build.jar build.jar
+COPY target/app.jar app.jar
 
 # Porta exposta pelo container
 EXPOSE 8080
 
 # Comando de inicialização
-CMD ["java", "-jar", "build.jar"]
+CMD ["java", "-jar", "app.jar"]
