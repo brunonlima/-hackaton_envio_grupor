@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  IMAGE_NAME: hackaton-image
+  IMAGE_NAME: 178675768868.dkr.ecr.us-east-1.amazonaws.com
   ECS_CLUSTER: hackaton_cluster
   ECS_SERVICE: hackaton-service
   TASK_DEFINITION: infra/task-definition.json
@@ -18,7 +18,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+      
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Run test and building
+        run: ./gradlew clean compileJava jar
+      
       - name: Build and tag Docker image
         id: build-image
         env:
