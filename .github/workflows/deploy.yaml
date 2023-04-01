@@ -55,7 +55,7 @@ jobs:
         id: push-image
         env:
           IMAGE_TAG: ${{ github.sha }}
-          LOGIN_SERVER: ${{ steps.login-ecr.outputs.registry }}
+          LOGIN_SERVER: 178675768868.dkr.ecr.us-east-1.amazonaws.com
         run: |
           docker push ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       
