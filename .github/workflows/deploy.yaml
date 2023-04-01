@@ -19,12 +19,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to AWS ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          region: ${{ env.AWS_REGION }}
-
       - name: Build and tag Docker image
         id: build-image
         env:
