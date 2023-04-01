@@ -10,6 +10,7 @@ env:
   IMAGE_NAME: hackaton-image
   ECS_CLUSTER: hackaton_cluster
   ECS_SERVICE: hackaton-service
+  TASK_DEFINITION: infra/task-definition.json
 
 jobs:
   deploy:
@@ -49,10 +50,20 @@ jobs:
         run: |
           docker push ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-      - name: Update ECS service
-        uses: aws-actions/amazon-ecs-deploy@v2
+      - name: Create new service
+        id: create-service
+        uses: aws-actions/amazon-ecs-create-service@v1
         with:
-          region: ${{ env.AWS_REGION }}
-          cluster: ${{ env.ECS_CLUSTER }}
-          service: ${{ env.ECS_SERVICE }}
-          image: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          cluster: hackaton_cluster
+          service-name: hackaton-service
+          task-definition: ${{ steps.task-def.outputs.family }}:${{ steps.task-def.outputs.revision }}
+          desired-count: '1'
+      
+      - name: Deploy to ECS
+        run: |
+          echo "Registering new task definition from $TASK_DEFINITION"
+          task_definition=$(cat $TASK_DEFINITION)
+          task_definition=$(echo "$task_definition" | sed "s;%BUILD_NUMBER%;$GITHUB_RUN_NUMBER;g")
+          task_definition_arn=$(aws ecs register-task-definition --cli-input-json "$task_definition" --query 'taskDefinition.taskDefinitionArn' --output text)
+          echo "Updating service $ECS_SERVICE_NAME with task definition $task_definition_arn"
+          aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE_NAME --task-definition $task_definition_arn
