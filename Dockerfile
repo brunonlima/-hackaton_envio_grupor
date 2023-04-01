@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copia os arquivos necessários para dentro do container
-COPY target/app.jar app.jar
+COPY build/libs/app-0.0.1-SNAPSHOT-plain.jar app.jar
 
 # Porta exposta pelo container
 EXPOSE 8080
