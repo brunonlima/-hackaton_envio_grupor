@@ -43,8 +43,8 @@ jobs:
           ECR_REGISTRY: 178675768868.dkr.ecr.us-east-1.amazonaws.com
           ECR_REPOSITORY: hackaton_repo
         run: |
-          echo ${{ secrets.AWS_ACCESS_KEY_ID }} | aws configure --profile user1 --access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} | aws configure --profile user1 --secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure --profile user1 --access-key-id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure --profile user1 --secret-access-key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ env.ECR_REGISTRY }}
 
       - name: Push Docker image to ECR
