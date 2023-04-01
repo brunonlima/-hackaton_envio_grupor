@@ -27,8 +27,8 @@
         }
     ],
     "family": "hackaton-app",
-    "taskRoleArn": "arn:aws:iam::246628379447:role/ecs-task-role",
-    "executionRoleArn": "arn:aws:iam::246628379447:role/ecs-task-execution-role",
+    "taskRoleArn": "arn:aws:iam::178675768868:role/ecs-task-role",
+    "executionRoleArn": "arn:aws:iam::178675768868:role/ecs-task-execution-role",
     "networkMode": "awsvpc",
     "volumes": [],
     "placementConstraints": [],
