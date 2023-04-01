@@ -25,7 +25,7 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           pwd
-          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} -hackaton_envio_grupor/
+          docker build -t ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ./-hackaton_envio_grupor
           docker tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       - name: Login to AWS ECR
         env:
