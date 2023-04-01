@@ -12,6 +12,28 @@
                     "protocol": "tcp"
                 }
             ],
+            "environment": [
+                {
+                  "name": "DB_HOSTNAME",
+                  "value": "terraform-20230401165722352900000001.cm7aufq5gxgb.us-east-1.rds.amazonaws.com"
+                },
+                {
+                   "name": "DB_PORT",
+                   "value": "3306"
+                },
+                {
+                   "name": "DB_NAME",
+                   "value": "hackaton"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "user"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "password"
+                }
+              ],
             "essential": true,
             "mountPoints": [],
             "volumesFrom": [],
