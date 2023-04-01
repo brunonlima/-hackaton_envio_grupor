@@ -18,7 +18,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Run test and building
-        run: ./mvnw clean test compile war:war
+        run: ./gradlew clean test compile war
       - run: mkdir staging && cp target/*.war staging
       - uses: actions/upload-artifact@v3
         with:
@@ -39,8 +39,8 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: abctechapi
-          environment_name: Abctechapi-env
+          application_name: hackaton
+          environment_name: Hackaton-env
           version_label: ${{ github.ref_name }}-R${{ github.run_id }}-V${{ github.run_number }}
           region: us-east-1
           deployment_package: ./staging/Package/abctechapi-0.0.2-SNAPSHOT.war
